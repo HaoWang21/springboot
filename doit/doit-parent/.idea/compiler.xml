@@ -7,6 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="doit-common" />
+        <module name="doit-manager-dao" />
+        <module name="doit-manager-interface" />
+        <module name="doit-manager-pojo" />
+        <module name="doit-manager-service" />
+        <module name="doit-manager-web" />
       </profile>
     </annotationProcessing>
   </component>
