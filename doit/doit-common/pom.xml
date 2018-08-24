@@ -9,7 +9,7 @@
         <relativePath>../doit-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <packaging>jar</packaging>
     <artifactId>doit-common</artifactId>
 
 
