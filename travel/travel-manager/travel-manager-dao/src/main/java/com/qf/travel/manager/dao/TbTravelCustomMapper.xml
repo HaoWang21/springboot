@@ -9,7 +9,7 @@
 
   <sql id="Where_Clause">
     <where>
-      t.status != 3
+      t.status != 7
     </where>
   </sql>
 

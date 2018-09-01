@@ -9,10 +9,10 @@ import com.qf.travel.manager.pojo.vo.TbTravelOrderQuery;
 import java.util.List;
 
 public interface TravelOrderService {
-    ItemResult<TbTravelOrder> listItemsByPage(PageInfo page, TbTravelOrderQuery query);
+    ItemResult<TbTravelOrder> listTravelOrderByPage(PageInfo page, TbTravelOrderQuery query);
 
     //批量修改状态为3
-//    int updateItemsByIds(List<Long> ids);
+    int updateTravelOrderByIds(List<String> ids);
 
-//    int addItem(TbItem item);
+    int addTravelOrder(TbTravelOrder torder);
 }

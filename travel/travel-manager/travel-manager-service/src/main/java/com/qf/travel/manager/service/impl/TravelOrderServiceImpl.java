@@ -6,6 +6,7 @@ import com.qf.travel.manager.dao.TbTravelCustomMapper;
 import com.qf.travel.manager.dao.TbTravelMapper;
 import com.qf.travel.manager.dao.TbTravelOrderMapper;
 import com.qf.travel.manager.pojo.po.TbTravelOrder;
+import com.qf.travel.manager.pojo.po.TbTravelOrderExample;
 import com.qf.travel.manager.pojo.vo.TbTravelOrderQuery;
 import com.qf.travel.manager.service.TravelOrderService;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ public class TravelOrderServiceImpl implements TravelOrderService {
     private TbTravelOrderMapper ttOrderDao;
 
     @Override
-    public ItemResult<TbTravelOrder> listItemsByPage(PageInfo page, TbTravelOrderQuery query) {
+    public ItemResult<TbTravelOrder> listTravelOrderByPage(PageInfo page, TbTravelOrderQuery query) {
         ItemResult<TbTravelOrder> result = new ItemResult<TbTravelOrder>();
         result.setCode(0);
         result.setMsg("success");
@@ -59,22 +60,23 @@ public class TravelOrderServiceImpl implements TravelOrderService {
         return result;
     }
 
-    /*@Override
-    public int updateItemsByIds(List<Long> ids) {
+    //批量删除
+    @Override
+    public int updateTravelOrderByIds(List<String> ids) {
         int i = 0;
         try {
-            //封装了一个商品对象 携带了删除状态
-            TbItem record = new TbItem();
-            record.setStatus((byte)3);
+            //封装了一个旅游订单对象TbTravelOrder 携带了删除状态
+            TbTravelOrder record = new TbTravelOrder();
+            record.setStatus(7);
             //使用example
             //创建模板
-            TbItemExample example = new TbItemExample();
-            TbItemExample.Criteria criteria = example.createCriteria();
+            TbTravelOrderExample example = new TbTravelOrderExample();
+            TbTravelOrderExample.Criteria criteria = example.createCriteria();
             //设值
-            criteria.andIdIn(ids);
+            criteria.andOrderIdIn(ids);
             //真正执行修改状态为3 即不在页面展示出来
             //相当于update tb_item set status=3 where id in (数组)
-            i = itemDao.updateByExampleSelective(record,example);
+            i = ttOrderDao.updateByExampleSelective(record,example);
         }catch(Exception e){
             logger.error(e.getMessage(),e);
             e.printStackTrace();
@@ -83,22 +85,24 @@ public class TravelOrderServiceImpl implements TravelOrderService {
     }
 
     @Override
-    public int addItem(TbItem item) {
+    public int addTravelOrder(TbTravelOrder torder) {
         int i = 0;
         try {
-            item.setCid((long)1);
-            item.setStatus((byte)1);
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             sdf.format(date);
-            item.setCreated(date);
-            item.setUpdated(date);
-            i = itemDao.insert(item);
+            torder.setCloseTime(date);
+            torder.setConsignTime(date);
+            torder.setCreateTime(date);
+            torder.setEndTime(date);
+            torder.setPaymentTime(date);
+            torder.setUpdateTime(date);
+            i = ttOrderDao.insert(torder);
         }catch(Exception e){
             logger.error(e.getMessage(),e);
             e.printStackTrace();
         }
         return i;
-    }*/
+    }
 
 }

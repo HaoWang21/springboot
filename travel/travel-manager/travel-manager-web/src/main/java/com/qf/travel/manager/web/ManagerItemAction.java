@@ -28,10 +28,10 @@ public class ManagerItemAction {
     //查询所有
     @ResponseBody
     @RequestMapping(value = "/travelOrders",method = RequestMethod.GET)
-    public ItemResult<TbTravelOrder> listItemsByPage(PageInfo page,TbTravelOrderQuery query){
+    public ItemResult<TbTravelOrder> listTravelOrderByPage(PageInfo page,TbTravelOrderQuery query){
         ItemResult<TbTravelOrder> result = null;
         try {
-            result = tOrderService.listItemsByPage(page,query);
+            result = tOrderService.listTravelOrderByPage(page,query);
         }catch (Exception e){
             //通过logback将异常打印到日志中
             logger.error(e.getMessage(),e);
@@ -40,13 +40,13 @@ public class ManagerItemAction {
         return result;
     }
 
-    /*//批量删除
+    //批量删除
     @ResponseBody
-    @RequestMapping(value = "/item/batch",method = RequestMethod.POST)
-    public Object updateItemsByIds(@RequestParam("ids[]") List<Long> ids){
+    @RequestMapping(value = "/travelorder/batch",method = RequestMethod.POST)
+    public Object updateTravelOrderByIds(@RequestParam("ids[]") List<String> ids){
         int i = 0;
         try {
-            i = itemService.updateItemsByIds(ids);
+            i = tOrderService.updateTravelOrderByIds(ids);
         }catch(Exception e){
             logger.error(e.getMessage(),e);
             e.printStackTrace();
@@ -56,16 +56,16 @@ public class ManagerItemAction {
 
     //新增
     @ResponseBody
-    @RequestMapping(value = "/item/add",method = RequestMethod.POST)
-    public Object addItem(TbItem item){
+    @RequestMapping(value = "/travelorder/add",method = RequestMethod.POST)
+    public Object addTravelOrder(TbTravelOrder torder){
         int i = 0;
         try {
-            i = itemService.addItem(item);
+            i = tOrderService.addTravelOrder(torder);
         }catch(Exception e){
             logger.error(e.getMessage(),e);
             e.printStackTrace();
         }
         return i;
-    }*/
+    }
 
 }

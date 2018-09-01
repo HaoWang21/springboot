@@ -4,13 +4,16 @@ layui.extend({
     admin: '{/}../../static/js/admin'
 });
 //按需加载admin.js
-layui.use(['admin', 'jquery', 'table','layer','form'], function () {
+
+layui.use(['admin', 'jquery', 'table','layer','form','laytpl','util'], function () {
     //初始化变量
     var admin = layui.admin,
         $ = layui.jquery,
         table = layui.table,
         form = layui.form;
         layer = layui.layer;
+        laytpl = layui.laytpl;
+
     //对表格进行渲染
     table.render({
         //什么是表格属性：page,elem,url,cols
@@ -28,17 +31,23 @@ layui.use(['admin', 'jquery', 'table','layer','form'], function () {
             {field: 'payment', title: '实付金额'},
             {field: 'paymentType', title: '支付类型'},
             {field: 'status', title: '订单状态', templet: '#myTpl'},
-            {field: 'createTime', title: '创建时间'},
-            {field: 'updateTime', title: '更新时间'},
-            {field: 'paymentTime', title: '付款时间'},
-            {field: 'consignTime', title: '生效时间'},
-            {field: 'endTime', title: '交易完成时间'},
-            {field: 'closeTime', title: '交易关闭时间'},
+            {field: 'createTime', title: '创建时间',templet:'<div>{{ layui.util.toDateString(d.createTime,\'yyyy-MM-dd HH:mm:ss\') }}</div>'
+                },
+            {field: 'updateTime', title: '更新时间',templet:'<div>{{ layui.util.toDateString(d.updateTime,\'yyyy-MM-dd HH:mm:ss\') }}</div>'
+                },
+            {field: 'paymentTime', title: '付款时间',templet:'<div>{{ layui.util.toDateString(d.paymentTime,\'yyyy-MM-dd HH:mm:ss\') }}</div>'
+                },
+            {field: 'consignTime', title: '生效时间',templet:'<div>{{ layui.util.toDateString(d.consignTime,\'yyyy-MM-dd HH:mm:ss\') }}</div>'
+                },
+            {field: 'endTime', title: '交易完成时间',templet:'<div>{{ layui.util.toDateString(d.endTime,\'yyyy-MM-dd HH:mm:ss\') }}</div>'
+                },
+            {field: 'closeTime', title: '交易关闭时间',templet:'<div>{{ layui.util.toDateString(d.closeTime,\'yyyy-MM-dd HH:mm:ss\') }}</div>'
+                },
             {field: 'userId', title: '用户id'},
             {field: 'buyerMessage', title: '买家留言'},
             {field: 'buyerNick', title: '买家昵称'},
             {field: 'buyerRate', title: '是否评价'}
-        ]]
+]]
     });
 
     /*var active={
@@ -67,7 +76,7 @@ layui.use(['admin', 'jquery', 'table','layer','form'], function () {
         if(data.length > 0){
             var ids = [];
             for (var i = 0;i<data.length;i++){
-                ids.push(data[i].id);
+                ids.push(data[i].orderId);
             }
             $.post(
                 //url 这次异步请求提交给谁处理 string
